@@ -4,7 +4,8 @@ const request = require('./request');
 
 describe('Words API', () => {
 
-    let savedWord = null;
+    let savedWords = null;
+    let testWord = null;
 
     beforeEach(() => {
         return mongo.then(db => {
@@ -14,9 +15,38 @@ describe('Words API', () => {
 
 
     beforeEach(() => {
+        const words = [
+            {
+                word: 'reconnoiter',
+                definition: 'make a military survey'
+            },
+            {
+                word: 'abnegation',
+                definition: 'the denial and rejection of a doctrine or a belief'
+            },
+            {
+                word: 'exacerbate',
+                definition: 'make worse'
+            },
+            {
+                word: 'inane',
+                definition: 'devoid of intelligence'
+            }
+        ];
+        return request
+            .post('/api/words')
+            .send(words)
+            .then(({ body }) => {
+                assert.equal(body.length, 4);
+                savedWords = body;
+                testWord = savedWords[0];
+            });
+    });
+
+    it('saves a word', () => {
         const word = {
-            word: 'reconnoiter',
-            definition: 'make a military survey'
+            word: 'rue',
+            definition: 'regret'
         };
         return request
             .post('/api/words')
@@ -24,7 +54,7 @@ describe('Words API', () => {
             .then(({ body }) => {
                 assert.ok(body._id);
                 assert.equal(body.word, word.word);
-                savedWord = body;
+                assert.equal(body.definition, word.definition);
             });
     });
 
@@ -32,33 +62,45 @@ describe('Words API', () => {
         return request
             .get('/api/words')
             .then(({ body }) => {
-                assert.deepEqual(body, [savedWord]);
+                assert.deepEqual(body, savedWords);
             });
     });
 
     it('gets a word by id', () => {
         return request
-            .get(`/api/words/${savedWord._id}`)
+            .get(`/api/words/${testWord._id}`)
             .then(({ body }) => {
-                assert.deepEqual(body, savedWord);
+                assert.deepEqual(body, testWord);
             });
     });
 
     it('updates a word', () => {
-        savedWord.definition = 'repurpose';
+        testWord.definition = 'repurpose';
         return request
-            .put(`/api/words/${savedWord._id}`)
-            .send(savedWord)
+            .put(`/api/words/${testWord._id}`)
+            .send(testWord)
             .then(({ body }) => {
-                assert.deepEqual(body, savedWord);
+                assert.deepEqual(body, testWord);
+            })
+            .then(() => {
+                return request.get('/api/words');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, savedWords);
             });
     });
 
     it('removes a word', () => {
         return request
-            .del(`/api/words/${savedWord._id}`)
+            .del(`/api/words/${testWord._id}`)
             .then(res => {
                 assert.equal(res.status, 200);
+            })
+            .then(() => {
+                return request.get('/api/words');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, savedWords.slice(1));
             });
     });
 
