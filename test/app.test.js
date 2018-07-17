@@ -17,31 +17,26 @@ describe('Hip-Hop API', () => {
             .then(({ body }) => body);
     }
 
-    let hov;
+    let rappers;
 
     beforeEach(() => {
         return save({ name: 'Jay-Z' })
             .then(data => {
-                hov = data;
+                rappers = data;
             });
     });
 
     it('saves a rapper', () => {
-        assert.isOk(hov._id);
+        assert.isOk(rappers[0]._id);
     });
 
     it('can get all rappers out of the database', () => {
         return request
-            .get('/')
-            .then(rappers => {
+            .get('/api/rappers')
+            .then(_rappers => {
                 // console.log(rappers);
-                assert.equal(rappers.body, [hov]);
+                assert.equal(_rappers.body, rappers);
             });
-    });
-
-    it.skip('can add a rapper to the db', () => {
-        return request
-            .post('/');
     });
     
     it('returns a 404 error on a bad path', () => {
