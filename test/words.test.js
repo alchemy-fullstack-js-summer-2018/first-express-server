@@ -44,4 +44,14 @@ describe('Words API', () => {
             });
     });
 
+    it('updates a word', () => {
+        savedWord.definition = 'repurpose';
+        return request
+            .put(`/api/words/${savedWord._id}`)
+            .send(savedWord)
+            .then(({ body }) => {
+                assert.deepEqual(body, savedWord);
+            });
+    });
+
 });
