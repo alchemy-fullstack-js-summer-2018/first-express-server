@@ -4,7 +4,7 @@ const request = require('./request');
 
 describe('Games API', () => {
 
-    let game;
+    let hollowKnight;
 
     beforeEach(() => {
         return mongo.then(db => {
@@ -22,19 +22,23 @@ describe('Games API', () => {
     beforeEach(() => {
         return save({ name: 'Hollow Knight' })
             .then(data => {
-                game = data;
+                hollowKnight = data;
             });
     });
 
     it('saves a game', () => {
-        assert.isOk(game._id);
+        assert.isOk(hollowKnight._id);
     });
 
-    it('gets a game', () => {
-        return request
-            .get(`api/games/${game.id}`)
+    it('gets a list of games', () => {
+        let darkestDungeon;
+        return save({ name: 'Darkest Dungeon' })
+            .then(darkest => {
+                darkestDungeon = darkest;
+                return request.get('/api/games');
+            })
             .then(({ body }) => {
-                assert.deepEqual(body, game);
+                assert.deepEqual(body, [hollowKnight, darkestDungeon]);
             });
     });
 });
