@@ -37,6 +37,9 @@ describe('Fruits API', () => {
             color: 'Orange',
             price: '$0.97'
         })
+            .then(data => {
+                orange = data;
+            });
     })
 
     it('Wired up and working', () => {
@@ -47,12 +50,20 @@ describe('Fruits API', () => {
         assert.isOk(apple._id);
     });
 
-    it('Gets a fruit', () => {
+    it('Gets a fruit by ID', () => {
         return request
             .get(`/api/fruits/${apple._id}`)
             .then(({ body }) => {
                 assert.deepEqual(body, apple)
             });
     });
+
+    it('Gets a list of all fruits', () => {
+        return request
+        .get('/api/fruits')
+        .then(({ body }) => {
+            assert.deepEqual(body, [apple, orange]);
+        });
+    })
 
 });
