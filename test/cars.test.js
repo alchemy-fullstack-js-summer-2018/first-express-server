@@ -48,6 +48,7 @@ describe('Cars Express API', () => {
                 return request.get('/api/cars');
             })
             .then(({ body }) => {
+                console.log(body);
                 assert.deepEqual(body, [lancer, gt40]);
             });
     });
