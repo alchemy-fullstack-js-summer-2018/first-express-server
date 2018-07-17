@@ -27,4 +27,23 @@ describe('Rude Things API', () => {
     it('saves a rude thing', () => {
         assert.isOk(trump._id);
     });
+
+    it('gets a rude thing by id', () => {
+        return request
+            .get(`/api/rudethings/${trump._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, trump);
+            });
+    });
+    it('gets a list of rude things', () => {
+        let pollution;
+        return save({ name: 'Pollution' })
+            .then(_pollution => {
+                pollution = _pollution;
+                return request.get('/api/rudethings');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [trump, pollution]);
+            });
+    });
 });
