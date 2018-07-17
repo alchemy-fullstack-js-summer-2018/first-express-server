@@ -41,6 +41,14 @@ describe('Hip-Hop API', () => {
                 assert.deepEqual(body, [hov, kanye]);
             });
     });
+
+    it('can get one rapper when given the id', () => {
+        return request
+            .get(`/api/rappers/${hov._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, hov);
+            });
+    });
     
     it('returns a 404 error on a bad path', () => {
         return request
