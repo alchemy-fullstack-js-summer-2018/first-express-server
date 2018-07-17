@@ -84,4 +84,15 @@ describe('Games API', () => {
                 assert.deepEqual(body, hollowKnight);
             });
     });
+
+    it('deletes a game by ID', () => {
+        return request
+            .del(`/api/games/${gwentGame._id}`)
+            .then(() => {
+                return request.get('/api/games');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [hollowKnight, darkestDungeon]);
+            });
+    });
 });
