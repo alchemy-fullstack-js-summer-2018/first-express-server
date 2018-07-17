@@ -65,4 +65,18 @@ describe('Penguin API', () => {
                 assert.deepEqual(body, billy);
             });
     });
+
+    it('removes a penguin', () => {
+        return request
+            .delete(`/api/penguins/${billy._id}`)
+            .then(result => {
+                assert.deepEqual(result.body, ({ removed: true }));
+            })
+            .then(() => {
+                return request.get('/api/penguins');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
 });
