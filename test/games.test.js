@@ -30,6 +30,14 @@ describe('Games API', () => {
         assert.isOk(hollowKnight._id);
     });
 
+    it('gets a game by ID', () => {
+        return request
+            .get(`/api/games/${hollowKnight._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, hollowKnight);
+            });
+    });
+
     it('gets a list of games', () => {
         let darkestDungeon;
         return save({ name: 'Darkest Dungeon' })
