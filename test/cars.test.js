@@ -34,7 +34,6 @@ describe('Cars Express API', () => {
         return request
             .get(`/api/cars/${lancer._id}`)
             .then(({ body }) => {
-                console.log(body);
                 assert.deepEqual(body, lancer);
             });
     });
