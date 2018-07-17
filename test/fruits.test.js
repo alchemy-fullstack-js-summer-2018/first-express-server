@@ -14,7 +14,7 @@ describe('Fruits API', () => {
         return request
             .post('/api/fruits')
             .send(fruit)
-            .then(( {body }) => body);
+            .then(({ body }) => body);
     }
 
     let apple;
@@ -30,7 +30,7 @@ describe('Fruits API', () => {
             .then(data => {
                 apple = data;
             });
-    })
+    });
 
     beforeEach(() => {
         return save({
@@ -41,7 +41,7 @@ describe('Fruits API', () => {
             .then(data => {
                 orange = data;
             });
-    })
+    });
 
     beforeEach(() => {
         return save({
@@ -52,10 +52,10 @@ describe('Fruits API', () => {
             .then(data => {
                 banana = data;
             });
-    })
+    });
 
     it('Wired up and working', () => {
-        assert.isOk(true)
+        assert.isOk(true);
     });
 
     it('Saves a fruit', () => {
@@ -66,24 +66,24 @@ describe('Fruits API', () => {
         return request
             .get(`/api/fruits/${apple._id}`)
             .then(({ body }) => {
-                assert.deepEqual(body, apple)
+                assert.deepEqual(body, apple);
             });
     });
 
     it('Gets a list of all fruits', () => {
         return request
-        .get('/api/fruits')
-        .then(({ body }) => {
-            assert.deepEqual(body, [apple, orange, banana]);
-        });
+            .get('/api/fruits')
+            .then(({ body }) => {
+                assert.deepEqual(body, [apple, orange, banana]);
+            });
     });
 
     it('Gets a 404 if no resource by ID is found', () => {
         return request
-        .get('/api/fruits/5b4e19d81cb530811cda0999')
-        .then(res => {
-            assert.deepEqual(res.status, 404);
-        });
+            .get('/api/fruits/5b4e19d81cb530811cda0999')
+            .then(res => {
+                assert.deepEqual(res.status, 404);
+            });
     });
 
     it('Deletes a resource by ID', () => {
@@ -95,7 +95,7 @@ describe('Fruits API', () => {
             .then(({ body }) => {
                 assert.deepEqual(body, [orange, banana]);
             });
-    })
+    });
 
     it('Updates a resource by ID', () => {
         apple.type = 'Green Apple';
@@ -103,7 +103,7 @@ describe('Fruits API', () => {
             .put(`/api/fruits/${apple._id}`)
             .send(apple)
             .then(({ body }) => {
-                assert.deepEqual(body, apple)
+                assert.deepEqual(body, apple);
             });
     });
 
