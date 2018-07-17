@@ -21,7 +21,7 @@ describe('Penguin API', () => {
     
     beforeEach(() => {
         billy = {
-            name: 'billy',
+            name: 'Billy',
             location: 'Antarctic',
             age: 5
         };
@@ -45,7 +45,8 @@ describe('Penguin API', () => {
 
     it('gets all penguins', () => {
         let sally;
-        return save(sally)
+
+        return save({ name: 'Sally' })
             .then(_sally => {
                 sally = _sally;
                 return request.get('/api/penguins');
