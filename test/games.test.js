@@ -30,6 +30,14 @@ describe('Games API', () => {
         assert.isOk(botw._id);
     });
 
+    it('returns game by id on GET', () => {
+        return request
+            .get(`/api/games/${botw._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, botw);
+            });
+    });
+
     it('returns games on GET', () => {
         let mkart;
         return save({ name: 'Mario Kart' })
@@ -41,4 +49,6 @@ describe('Games API', () => {
                 assert.deepEqual(body, [botw, mkart]);
             });
     });
+
+    
 });
