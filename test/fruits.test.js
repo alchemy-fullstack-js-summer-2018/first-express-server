@@ -76,6 +76,25 @@ describe('Fruits API', () => {
         .then(({ body }) => {
             assert.deepEqual(body, [apple, orange, banana]);
         });
+    });
+
+    it('Gets a 404 if no resource by ID is found', () => {
+        return request
+        .get('/api/fruits/5b4e19d81cb530811cda0999')
+        .then(res => {
+            assert.deepEqual(res.status, 404);
+        });
+    });
+
+    it('Deletes a resource by ID', () => {
+        return request
+            .del(`/fruits/${fruit._id}`)
+            .then(() => {
+                return request.get('/fruits');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
     })
 
 });
