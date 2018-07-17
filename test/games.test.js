@@ -75,7 +75,13 @@ describe('Games API', () => {
             });
     });
 
-    // it('updates a game by ID', () => {
-
-    // })
+    it('updates a game by ID', () => {
+        hollowKnight.genre = 'Soulslike';
+        return request
+            .put(`/api/games/${hollowKnight._id}`)
+            .send(hollowKnight)
+            .then(({ body }) => {
+                assert.deepEqual(body, hollowKnight);
+            });
+    });
 });
