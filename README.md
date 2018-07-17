@@ -1,10 +1,12 @@
 # First Express Server
 
 ## Project Description
-Stay tuned!
+An Express server with a single resource using MongoDb as the database.
 
 ## Developer
-Requires Node v10 or later.
+Requires:
+* Node v10 or later.
+* MongoDB
 
 ### How to get started
 * Fork repository, clone locally, navigate to repository directory,
@@ -14,8 +16,17 @@ Requires Node v10 or later.
 ### How to use API
 * Connect to server with `npm run start`.
 * Enter `http://localhost:3000` in your browser.
+* This API saves a single resource to MongoDB: Games. To the data, click the link provided on the splash page.
 
-More to come...
+The following methods are used for the paths listed:
+
+Method | Path
+---|---
+`GET` |     `/<resources>`
+`GET` |     `/<resources>/:id`
+`POST` |    `/<resources>`
+`PUT` |     `/<resources>/:id`
+`DELETE` |  `/<resources>/:id`
 
 ## Contributor
 [Mariah Adams](https://github.com/MariahAdams)
