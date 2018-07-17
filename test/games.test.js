@@ -51,6 +51,12 @@ describe('Games API', () => {
     });
 
     it('updates a game on PUT', () => {
-
+        botw.name = 'BOTW';
+        return request 
+            .put(`/api/games/${botw._id}`)
+            .send(botw)
+            .then(({ body }) => {
+                assert.deepEqual(body, botw);
+            });
     });   
 });
