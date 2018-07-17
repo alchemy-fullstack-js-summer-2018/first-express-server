@@ -1,7 +1,7 @@
 # First Express Server
 
 ## Project Description
-Stay tuned!
+A database of hates featuring rude things. 
 
 ## Developer
 Requires Node v10 or later.
