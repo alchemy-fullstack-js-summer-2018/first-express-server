@@ -5,3 +5,4 @@ services:
   - mongodb
 env:
   - MONGODB_URI=mongodb://localhost:27017/pirates_test
+  - PORT=3000
