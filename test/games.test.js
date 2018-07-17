@@ -50,5 +50,7 @@ describe('Games API', () => {
             });
     });
 
-    
+    it('updates a game on PUT', () => {
+
+    });   
 });
