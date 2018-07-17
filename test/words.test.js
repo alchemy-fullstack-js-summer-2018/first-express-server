@@ -104,4 +104,13 @@ describe('Words API', () => {
             });
     });
 
+    it('throws a 500 error', () => {
+        return request
+            .get('/api/words/123')
+            .then(err => {
+                assert.equal(err.status, 500);
+                assert.equal(err.text, 'An unexpected error occurred.');
+            });
+    });
+
 });
