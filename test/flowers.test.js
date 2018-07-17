@@ -37,4 +37,16 @@ describe('Flowers API', () => {
                 assert.deepEqual(body, daffodil);
             });
     });
+
+    it('gets a list of flowers', () => {
+        let poppy;
+        return save({ name: 'California Poppy' })
+            .then(_poppy => {
+                poppy = _poppy;
+                return request.get('/api/flowers');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [daffodil, poppy]);
+            });
+    });
 });
