@@ -95,4 +95,12 @@ describe('Games API', () => {
                 assert.deepEqual(body, [hollowKnight, darkestDungeon]);
             });
     });
+
+    it('returns 404 when id is not found when getting', () => {
+        return request
+            .get('/bad/path')
+            .then(res => {
+                assert.equal(res.statusCode, 404);
+            });
+    });
 });
