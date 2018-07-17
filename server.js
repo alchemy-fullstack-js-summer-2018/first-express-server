@@ -3,11 +3,11 @@
 require('dotenv').config();
 const { createServer } = require('http');
 require('./lib/mongodb');
-const app = require('app');
+const app = require('./lib/app');
 
-const PORT = process.envPORT || 3000;
+const PORT = process.env.PORT || 3000;
 const server = createServer(app);
 
 server.listen(PORT, () => {
-    console.log('server running on port:', server.address().port());
+    console.log('server running on port:', server.address().port);
 });
