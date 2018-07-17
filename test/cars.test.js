@@ -34,6 +34,7 @@ describe('Cars Express API', () => {
         return request
             .get(`/api/cars/${lancer._id}`)
             .then(({ body }) => {
+                console.log(body);
                 assert.deepEqual(body, lancer);
             });
     });
@@ -71,9 +72,9 @@ describe('Cars Express API', () => {
             });
     });
 
-    it('Returns 404 on bad url', () => {
+    it('Returns 404 on not existing id', () => {
         return request
-            .get('/bad')
+            .get('/api/cars/5b4e2f332366e36ce4616666')
             .then(res => {
                 assert.equal(res.status, 404);
             });
