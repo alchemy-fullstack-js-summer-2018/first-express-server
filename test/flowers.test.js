@@ -29,4 +29,12 @@ describe('Flowers API', () => {
     it('saves a flower', () => {
         assert.isOk(daffodil._id);
     });
+
+    it('gets a flower by id', () => {
+        return request
+            .get(`/api/flowers/${daffodil._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, daffodil);
+            });
+    });
 });
