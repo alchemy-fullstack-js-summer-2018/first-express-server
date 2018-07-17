@@ -53,4 +53,16 @@ describe('Cars Express API', () => {
             });
     });
 
+    it('Removes a car by id', () => {
+        return request
+            .del(`/api/cars/${lancer._id}`)
+            .then(() => {
+                return request.get('/api/cars');
+            })
+            .then(({ body }) => {
+                console.log(body);
+                assert.deepEqual(body, []);
+            });
+    });
+
 });
