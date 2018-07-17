@@ -1,12 +1,12 @@
+/* eslint no-console: off */
+require('dotenv').config();
 const { createServer } = require('http');
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-chai.use(chaiHttp);
+require('./lib/mongodb');
+const app = require('./lib/app');
 
-const app = require('../lib/app');
+const PORT = process.env.PORT || 3000;
 const server = createServer(app);
-const request = chai.request(server).keepOpen();
 
-after(done => server.close(done));
-
-module.exports = request;
+server.listen(PORT, () => {
+    console.log('Server running on', PORT);
+});
