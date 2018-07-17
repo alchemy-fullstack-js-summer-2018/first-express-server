@@ -71,4 +71,12 @@ describe('Cars Express API', () => {
             });
     });
 
+    it('Returns 404 on bad url', () => {
+        return request
+            .get('/bad')
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+
 });
