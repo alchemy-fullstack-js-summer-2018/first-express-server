@@ -24,7 +24,7 @@ describe('Rude Things API', () => {
             });
     });
 
-    it('saves a rude thing', () => {
+    it('posts/saves a rude thing', () => {
         assert.isOk(trump._id);
     });
 
@@ -35,7 +35,7 @@ describe('Rude Things API', () => {
                 assert.deepEqual(body, trump);
             });
     });
-    it('gets a list of rude things', () => {
+    it('gets a list of all rude things', () => {
         let pollution;
         return save({ name: 'Pollution' })
             .then(_pollution => {
@@ -45,5 +45,15 @@ describe('Rude Things API', () => {
             .then(({ body }) => {
                 assert.deepEqual(body, [trump, pollution]);
             });
+    });
+    it('updates a rude thing', () => {
+        trump.name = 'Donald J. Trump';
+        return request
+            .put(`/api/rudethings/${trump._id}`)
+            .send(trump)
+            .then(({ body }) => {
+                assert.deepEqual(body, trump);
+            });
+
     });
 });
