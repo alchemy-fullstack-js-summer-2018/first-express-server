@@ -67,4 +67,15 @@ describe('Hip-Hop API', () => {
                 assert.deepEqual(body, hov);
             });
     });
+
+    it('deletes a rapper', () => {
+        return request
+            .del(`/api/rappers/${hov._id}`)
+            .then(() => {
+                return request.get('/api/rappers');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
 });
