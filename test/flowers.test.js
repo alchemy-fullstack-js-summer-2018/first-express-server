@@ -38,6 +38,16 @@ describe('Flowers API', () => {
             });
     });
 
+    it('updates a flower', () => {
+        daffodil.color = 'white';
+        return request
+            .put(`/api/flowers/${daffodil._id}`)
+            .send(daffodil)
+            .then(({ body }) => {
+                assert.deepEqual(body, daffodil);
+            });
+    });
+
     it('gets a list of flowers', () => {
         let poppy;
         return save({ name: 'California Poppy' })
@@ -49,4 +59,24 @@ describe('Flowers API', () => {
                 assert.deepEqual(body, [daffodil, poppy]);
             });
     });
+
+    it('returns 404 on bad id', () => {
+        return request
+            .get('/bad id')
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+
+    // it('removes a flower', () => {
+    //     return request
+    //         .del(`/api/flowers/${daffodil._id}`)
+    //         .then(() => {
+    //             return request.get('/api/flowers');
+    //         })
+    //         .then(({ body }) => {
+    //             assert.deepEqual(body, []);
+    //         });
+    // });
+
 });
