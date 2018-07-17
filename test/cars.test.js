@@ -40,4 +40,16 @@ describe('Cars Express API', () => {
             });
     });
 
+    it('Gets a list of cars', () => {
+        let gt40;
+        return save({ brand: 'ford' })
+            .then(_gt40 => {
+                gt40 = _gt40;
+                return request.get('/api/cars');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [lancer, gt40]);
+            });
+    });
+
 });
