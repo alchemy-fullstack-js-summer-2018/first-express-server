@@ -27,7 +27,6 @@ describe('Cars Express API', () => {
     });
 
     it('Saves a car', () => {
-        console.log(lancer._id);
         assert.isOk(lancer._id);
     });
 
@@ -35,7 +34,6 @@ describe('Cars Express API', () => {
         return request
             .get(`/api/cars/${lancer._id}`)
             .then(({ body }) => {
-                console.log(body);
                 assert.deepEqual(body, lancer);
             });
     });
@@ -48,19 +46,18 @@ describe('Cars Express API', () => {
                 return request.get('/api/cars');
             })
             .then(({ body }) => {
-                console.log(body);
                 assert.deepEqual(body, [lancer, gt40]);
             });
     });
 
     it('Updates a car', () => {
-        car.brand = 'lexus';
+        lancer.brand = 'lexus';
         return request 
             .put(`/api/cars/${lancer._id}`)
-            .send(car)
+            .send(lancer)
             .then(({ body }) => {
                 console.log(body);
-                assert.deepEqual(body, car);
+                assert.deepEqual(body, lancer);
             });
     });
 
@@ -71,7 +68,6 @@ describe('Cars Express API', () => {
                 return request.get('/api/cars');
             })
             .then(({ body }) => {
-                console.log(body);
                 assert.deepEqual(body, []);
             });
     });
