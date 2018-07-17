@@ -88,12 +88,12 @@ describe('Fruits API', () => {
 
     it('Deletes a resource by ID', () => {
         return request
-            .del(`/fruits/${fruit._id}`)
+            .del(`/api/fruits/${apple._id}`)
             .then(() => {
-                return request.get('/fruits');
+                return request.get('/api/fruits');
             })
             .then(({ body }) => {
-                assert.deepEqual(body, []);
+                assert.deepEqual(body, [orange, banana]);
             });
     })
 
