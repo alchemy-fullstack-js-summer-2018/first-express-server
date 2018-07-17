@@ -18,7 +18,9 @@ describe('Shows API', () => {
     }
 
     let breakingBad;
-    let dvr;
+    let legion;
+    let westWorld;
+    let dvr = [];
 
     beforeEach(() => {
         return save({
@@ -27,6 +29,27 @@ describe('Shows API', () => {
         })
             .then(data => {
                 breakingBad = data;
+                dvr[0] = breakingBad;
+            });
+    });
+    beforeEach(() => {
+        return save({
+            network: 'FX',
+            seasons: 2,
+        })
+            .then(data => {
+                legion = data;
+                dvr[1] = legion;
+            });
+    });
+    beforeEach(() => {
+        return save({
+            network: 'HBO',
+            seasons: 2,
+        })
+            .then(data => {
+                westWorld = data;
+                dvr[2] = westWorld;
             });
     });
 
@@ -64,12 +87,18 @@ describe('Shows API', () => {
         return request
             .delete(`/shows/${breakingBad._id}`)
             .then(() => {
-                return request.get(`/shows/${breakingBad._id}`)
+                return request.get(`/shows/${breakingBad._id}`);
             })
             .then(({ body }) => {
                 assert.equal(body, null);
             });
     });
 
-    ()
+    it('gets all the shows', () => {
+        return request
+            .get('/shows')
+            .then(({ body }) => {
+                assert.deepEqual(body, dvr);
+            });
+    });
 });
