@@ -70,4 +70,12 @@ describe('Games API', () => {
                 assert.deepEqual(body, {});
             });
     });
+
+    it('returns 404 on bad url', () => {
+        return request
+            .get('/bad')
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
 });
