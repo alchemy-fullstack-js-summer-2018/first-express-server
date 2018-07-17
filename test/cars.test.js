@@ -55,7 +55,7 @@ describe('Cars Express API', () => {
 
     it('Removes a car by id', () => {
         return request
-            .del(`/api/cars/${lancer._id}`)
+            .delete(`/api/cars/${lancer._id}`)
             .then(() => {
                 return request.get('/api/cars');
             })
