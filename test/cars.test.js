@@ -27,8 +27,17 @@ describe('Cars Express API', () => {
     });
 
     it('Saves a car', () => {
-        console.log(lancer.body);
+        console.log(lancer._id);
         assert.isOk(lancer._id);
+    });
+
+    it('Gets a car', () => {
+        return request
+            .get(`/api/cars/${lancer._id}`)
+            .then(({ body }) => {
+                console.log(body);
+                assert.deepEqual(body, lancer);
+            });
     });
 
 });
