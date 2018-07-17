@@ -66,4 +66,12 @@ describe('Rude Things API', () => {
                 assert.deepEqual(body, [trump]);
             });
     });
+
+    it('returns 404 when id not found', () => {
+        return request
+            .get('/bad/path')
+            .then(res => {
+                assert.equal(res.statusCode, 404);
+            });
+    });
 });
