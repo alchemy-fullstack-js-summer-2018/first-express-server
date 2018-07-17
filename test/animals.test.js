@@ -26,6 +26,15 @@ describe('Animals API', () => {
             });
     });
 
+    it('returns 404 on bad url', () => {
+        return request
+            .get('/bad')
+            .then(res => {
+                assert.equal(res.status, 404);
+            });
+    });
+    
+    
     it('saves an animal', () => {
         assert.isOk(wally._id);
     });
@@ -40,6 +49,35 @@ describe('Animals API', () => {
             .then(({ body }) => {
                 assert.deepEqual(body, [wally, wilford]);
             });
-
     });
+
+    it('gets an animal by id', () => {
+        return request
+            .get(`/api/animals/${wally._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, wally);
+            });
+    });
+
+    it('removes an animal', () => {
+        return request
+            .del(`/api/animals/${wally._id}`)
+            .then(() => {
+                return request.get('/api/animals');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
+
+    it('updates an animal', () => {
+        wally.name = 'Wallace the Walrus';
+        return request
+            .put(`/api/animals/${wally._id}`)
+            .send(wally)
+            .then(({ body }) => {
+                assert.deepEqual(body, wally);
+            });
+    });
+
 });
