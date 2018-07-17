@@ -4,7 +4,24 @@ const request = require('./request');
 
 describe('Games API', () => {
 
+    let hollow = {
+        name: 'Hollow Knight',
+        genre: 'Action'
+    };
+
+    let darkest = {
+        name: 'Darkest Dungeon',
+        genre: 'Turn-based RPG'
+    };
+
+    let gwent = {
+        name: 'Gwent',
+        genre: 'CCG'
+    };
+
     let hollowKnight;
+    let darkestDungeon;
+    let gwentGame;
 
     beforeEach(() => {
         return mongo.then(db => {
@@ -20,14 +37,26 @@ describe('Games API', () => {
     }
 
     beforeEach(() => {
-        return save({ name: 'Hollow Knight' })
+        return save(hollow)
             .then(data => {
                 hollowKnight = data;
             });
     });
+    beforeEach(() => {
+        return save(darkest)
+            .then(data => {
+                darkestDungeon = data;
+            });
+    });
+    beforeEach(() => {
+        return save(gwent)
+            .then(data => {
+                gwentGame = data;
+            });
+    });
 
     it('saves a game', () => {
-        assert.isOk(hollowKnight._id);
+        assert.isOk(gwentGame._id);
     });
 
     it('gets a game by ID', () => {
@@ -39,14 +68,14 @@ describe('Games API', () => {
     });
 
     it('gets a list of games', () => {
-        let darkestDungeon;
-        return save({ name: 'Darkest Dungeon' })
-            .then(darkest => {
-                darkestDungeon = darkest;
-                return request.get('/api/games');
-            })
+        return request
+            .get('/api/games')
             .then(({ body }) => {
-                assert.deepEqual(body, [hollowKnight, darkestDungeon]);
+                assert.deepEqual(body, [hollowKnight, darkestDungeon, gwentGame]);
             });
     });
+
+    // it('updates a game by ID', () => {
+
+    // })
 });
