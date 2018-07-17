@@ -50,14 +50,18 @@ describe('Hip-Hop API', () => {
             });
     });
     
-    it('returns a 404 error on a bad path', () => {
+    
+    it('deletes a rapper', () => {
         return request
-            .get('/does/not/exist')
-            .then(res => {
-                assert.equal(res.status, 404);
+            .del(`/api/rappers/${hov._id}`)
+            .then(() => {
+                return request.get('/api/rappers');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
             });
     });
-
+    
     it('updates a rapper', () => {
         hov.name = 'J-Hova';
         return request
@@ -67,15 +71,12 @@ describe('Hip-Hop API', () => {
                 assert.deepEqual(body, hov);
             });
     });
-
-    it('deletes a rapper', () => {
+    
+    it('returns a 404 error on a bad path', () => {
         return request
-            .del(`/api/rappers/${hov._id}`)
-            .then(() => {
-                return request.get('/api/rappers');
-            })
-            .then(({ body }) => {
-                assert.deepEqual(body, []);
+            .get('/does/not/exist')
+            .then(res => {
+                assert.equal(res.status, 404);
             });
     });
 });
