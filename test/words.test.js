@@ -36,4 +36,12 @@ describe('Words API', () => {
             });
     });
 
+    it('gets a word by id', () => {
+        return request
+            .get(`/api/words/${savedWord._id}`)
+            .then(({ body }) => {
+                assert.deepEqual(body, savedWord);
+            });
+    });
+
 });
