@@ -18,6 +18,7 @@ describe('Fruits API', () => {
     }
 
     let apple;
+    let orange;
 
     beforeEach(() => {
         return save({
@@ -28,6 +29,14 @@ describe('Fruits API', () => {
             .then(data => {
                 apple = data;
             });
+    })
+
+    beforeEach(() => {
+        return save({
+            type: 'Orange',
+            color: 'Orange',
+            price: '$0.97'
+        })
     })
 
     it('Wired up and working', () => {
