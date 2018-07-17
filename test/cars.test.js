@@ -53,6 +53,17 @@ describe('Cars Express API', () => {
             });
     });
 
+    it('Updates a car', () => {
+        car.brand = 'lexus';
+        return request 
+            .put(`/api/cars/${lancer._id}`)
+            .send(car)
+            .then(({ body }) => {
+                console.log(body);
+                assert.deepEqual(body, car);
+            });
+    });
+
     it('Removes a car by id', () => {
         return request
             .delete(`/api/cars/${lancer._id}`)
