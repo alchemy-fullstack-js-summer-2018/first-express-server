@@ -59,4 +59,15 @@ describe('Games API', () => {
                 assert.deepEqual(body, botw);
             });
     });   
+
+    it('deletes one game on DELETE', () => {
+        return request  
+            .del(`/api/games/${botw._id}`)
+            .then(() => {
+                return request.get('/games');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, {});
+            });
+    });
 });
