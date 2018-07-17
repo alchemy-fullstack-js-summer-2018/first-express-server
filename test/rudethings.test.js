@@ -56,4 +56,14 @@ describe('Rude Things API', () => {
             });
 
     });
+    it('removes a rude thing by id', () => {
+        return request
+            .delete(`/api.rudethings/${trump._id}`)
+            .then(() => {
+                return request.get('/api/rudethings');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [trump]);
+            });
+    });
 });
