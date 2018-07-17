@@ -19,6 +19,7 @@ describe('Fruits API', () => {
 
     let apple;
     let orange;
+    let banana;
 
     beforeEach(() => {
         return save({
@@ -42,6 +43,17 @@ describe('Fruits API', () => {
             });
     })
 
+    beforeEach(() => {
+        return save({
+            type: 'Banana',
+            color: 'Yellow',
+            price: '$0.19'
+        })
+            .then(data => {
+                banana = data;
+            });
+    })
+
     it('Wired up and working', () => {
         assert.isOk(true)
     });
@@ -62,7 +74,7 @@ describe('Fruits API', () => {
         return request
         .get('/api/fruits')
         .then(({ body }) => {
-            assert.deepEqual(body, [apple, orange]);
+            assert.deepEqual(body, [apple, orange, banana]);
         });
     })
 
