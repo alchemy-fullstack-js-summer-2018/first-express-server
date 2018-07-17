@@ -57,4 +57,14 @@ describe('Hip-Hop API', () => {
                 assert.equal(res.status, 404);
             });
     });
+
+    it('updates a rapper', () => {
+        hov.name = 'J-Hova';
+        return request
+            .put(`/api/rappers/${hov._id}`)
+            .send(hov)
+            .then(({ body }) => {
+                assert.deepEqual(body, hov);
+            });
+    });
 });
