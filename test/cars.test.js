@@ -56,7 +56,6 @@ describe('Cars Express API', () => {
             .put(`/api/cars/${lancer._id}`)
             .send(lancer)
             .then(({ body }) => {
-                console.log(body);
                 assert.deepEqual(body, lancer);
             });
     });
