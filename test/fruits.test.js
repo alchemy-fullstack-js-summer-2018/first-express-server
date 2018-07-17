@@ -97,4 +97,14 @@ describe('Fruits API', () => {
             });
     })
 
+    it('Updates a resource by ID', () => {
+        apple.type = 'Green Apple';
+        return request
+            .put(`/api/fruits/${apple._id}`)
+            .send(apple)
+            .then(({ body }) => {
+                assert.deepEqual(body, apple)
+            });
+    });
+
 });
