@@ -54,4 +54,12 @@ describe('Words API', () => {
             });
     });
 
+    it('removes a word', () => {
+        return request
+            .del(`/api/words/${savedWord._id}`)
+            .then(res => {
+                assert.equal(res.status, 200);
+            });
+    });
+
 });
