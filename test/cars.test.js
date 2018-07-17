@@ -27,6 +27,7 @@ describe('Cars Express API', () => {
     });
 
     it('Saves a car', () => {
+        console.log(lancer.body);
         assert.isOk(lancer._id);
     });
 
