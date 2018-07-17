@@ -55,4 +55,14 @@ describe('Penguin API', () => {
             });
         
     });
+
+    it('updates billy the penguin', () => {
+        billy.location = 'Salt Lake City';
+        return request
+            .put(`/api/penguins/${billy._id}`)
+            .send(billy)
+            .then(({ body }) => {
+                assert.deepEqual(body, billy);
+            });
+    });
 });
