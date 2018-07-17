@@ -29,4 +29,16 @@ describe('Games API', () => {
     it('saves a game', () => {
         assert.isOk(botw._id);
     });
+
+    it('returns games on GET', () => {
+        let mkart;
+        return save({ name: 'Mario Kart' })
+            .then(_mkart => {
+                mkart = _mkart;
+                return request.get('/api/games');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [botw, mkart]);
+            });
+    });
 });
