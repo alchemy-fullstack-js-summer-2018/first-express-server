@@ -1,0 +1,33 @@
+{
+  "name": "first-express-server",
+  "version": "1.0.0",
+  "description": "Single resource API made using Express, with MongoDB",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "mocha": "mocha",
+    "test": "npm run mocha",
+    "test:watch": "nodemon --exec 'npm run mocha -s'",
+    "start": "node server.js",
+    "start:watch": "nodemon server.js"
+  },
+  "author": "Injoong Yoon <injoongyoon@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "eslint": "^5.1.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.2"
+  },
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "mongodb": "^3.1.1"
+  }
+}
