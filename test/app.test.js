@@ -17,25 +17,28 @@ describe('Hip-Hop API', () => {
             .then(({ body }) => body);
     }
 
-    let rappers;
+    let hov;
 
     beforeEach(() => {
         return save({ name: 'Jay-Z' })
             .then(data => {
-                rappers = data;
+                hov = data;
             });
     });
 
     it('saves a rapper', () => {
-        assert.isOk(rappers[0]._id);
+        assert.isOk(hov._id);
     });
 
     it('can get all rappers out of the database', () => {
-        return request
-            .get('/api/rappers')
-            .then(_rappers => {
-                // console.log(rappers);
-                assert.equal(_rappers.body, rappers);
+        let kanye;
+        return save({ name: 'Kanye West' })
+            .then(_kanye => {
+                kanye = _kanye;
+                return request.get('/api/rappers');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [hov, kanye]);
             });
     });
     
