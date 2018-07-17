@@ -68,15 +68,15 @@ describe('Flowers API', () => {
             });
     });
 
-    // it('removes a flower', () => {
-    //     return request
-    //         .del(`/api/flowers/${daffodil._id}`)
-    //         .then(() => {
-    //             return request.get('/api/flowers');
-    //         })
-    //         .then(({ body }) => {
-    //             assert.deepEqual(body, []);
-    //         });
-    // });
+    it('removes a flower', () => {
+        return request
+            .del(`/api/flowers/${daffodil._id}`)
+            .then(() => {
+                return request.get('/api/flowers');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, []);
+            });
+    });
 
 });
