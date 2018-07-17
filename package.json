@@ -16,8 +16,16 @@
     "start": "node server.js",
     "start:watch": "nodemon server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AttilaTheHen/first-express-server.git"
+  },
   "author": "Injoong Yoon <injoongyoon@gmail.com>",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AttilaTheHen/first-express-server/issues"
+  },
+  "homepage": "https://github.com/AttilaTheHen/first-express-server#readme",
   "devDependencies": {
     "chai": "^4.1.2",
     "chai-http": "^4.0.0",
