@@ -3,5 +3,5 @@ node_js:
   - "10"
 services:
   - mongodb
-env:
+  env:
   - MONGODB_URI=mongodb://localhost:27017/easton

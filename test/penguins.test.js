@@ -80,4 +80,12 @@ describe('Penguin API', () => {
                 assert.deepEqual(body, []);
             });
     });
+
+    it('returns false if removed failed', () => {
+        return request
+            .delete('/api/penguins/5b4f97879f0450f41ebfed36')
+            .then(result => {
+                assert.deepEqual(result.body, ({ removed: false }));
+            });
+    });
 });
