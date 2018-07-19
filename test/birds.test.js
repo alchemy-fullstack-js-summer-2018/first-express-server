@@ -78,6 +78,4 @@ describe('Birds API', () => {
                 assert.equal(res.status, 404);
             });
     });
-
-
 });
