@@ -43,4 +43,40 @@ describe('Hikers API', () => {
             });
     });
 
+    it('gets a list of hikers', () => {
+        return request  
+            .get('/api/hikers')
+            .then(({ body }) => {
+                assert.deepEqual(body, [allgood]);
+            });
+    });
+
+    it.skip('updates a hiker by ID', () => {
+        allgood.trail = 'AT';
+        return request
+            .put(`/api/hikers/${allgood._id}`)
+            .send(allgood)
+            .then(({ body }) => {
+                assert.deepEqual(body, allgood);
+            });
+    });
+
+    it('deletes a hiker by ID', () => {
+        return request
+            .del(`/api/hikers/${allgood._id}`)
+            .then(() => {
+                return request.get('/api/hikers');
+            })
+            .then(({ body }) => {
+                assert.deepEqual(body, [allgood]);
+            });
+    });
+
+    it('returns 404 when id is not found on GET', () => {
+        return request
+            .get('/bad/path')
+            .then(res => {
+                assert.equal(res.statusCode, 404);
+            });
+    });
 });
